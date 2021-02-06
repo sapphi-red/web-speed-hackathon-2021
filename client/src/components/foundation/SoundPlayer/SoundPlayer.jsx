@@ -18,28 +18,6 @@ import { SoundWaveSVG } from '../SoundWaveSVG';
  * @type {React.VFC<Props>}
  */
 const SoundPlayer = ({ src, title, artist }) => {
-  /** @type {[ArrayBuffer | null, (buffer: ArrayBuffer) => void]} */
-  const [soundArrayBuffer, setSoundArrayBuffer] = React.useState(null);
-
-  React.useEffect(() => {
-    (async () => {
-      const data = await fetchBinary({ url: src });
-      setSoundArrayBuffer(data);
-    })();
-  }, [src]);
-
-  /**
-   * 音声ファイルを読み込むための ObjectURL
-   * @type {string | null}
-   */
-  const blobUrl = React.useMemo(() => {
-    if (soundArrayBuffer === null) {
-      return null;
-    }
-    const blob = new Blob([soundArrayBuffer], { type: 'audio/mpeg' });
-    return URL.createObjectURL(blob);
-  }, [soundArrayBuffer]);
-
   /** @type {React.RefObject<HTMLAudioElement>} */
   const audioRef = React.useRef(null);
   const [isPlaying, setIsPlaying] = React.useState(false);
@@ -70,7 +48,7 @@ const SoundPlayer = ({ src, title, artist }) => {
 
   return (
     <div className="flex items-center justify-center w-full h-full">
-      {blobUrl ? <audio ref={audioRef} loop={true} src={blobUrl} onTimeUpdate={handleTimeUpdate} /> : null}
+      <audio ref={audioRef} loop={true} src={src} preload="none" onTimeUpdate={handleTimeUpdate} />
       <div className="p-2">
         <button
           className="flex items-center justify-center w-8 h-8 text-white text-sm bg-blue-600 rounded-full hover:opacity-75"
@@ -85,9 +63,7 @@ const SoundPlayer = ({ src, title, artist }) => {
         <p className="text-gray-500 whitespace-nowrap text-sm overflow-hidden overflow-ellipsis">{artist}</p>
         <AspectRatioBox aspectHeight={2} aspectWidth={15}>
           <div className="w-full h-full mt-2" style={style}>
-            {soundArrayBuffer ? (
-              <SoundWaveSVG soundData={soundArrayBuffer} />
-            ) : null}
+            <SoundWaveSVG src={src} />
           </div>
         </AspectRatioBox>
       </div>
