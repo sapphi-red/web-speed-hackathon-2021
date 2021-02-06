@@ -10,7 +10,7 @@ import React from 'react';
  */
 const SoundWaveSVG = ({ src }) => {
   return (
-    <img src={`${src}.meta.svg`} className="w-full h-full" />
+    <img src={`${src}.meta.svg`} loading="lazy" className="w-full h-full" />
   );
 };
 
