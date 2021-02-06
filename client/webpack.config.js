@@ -11,7 +11,6 @@ const DIST_PATH = path.resolve(__dirname, '../dist');
 /** @type {import('webpack').Configuration} */
 const config = {
   entry: [
-    'jquery-binarytransport',
     path.resolve(SRC_PATH, './index.css'),
     path.resolve(SRC_PATH, './index.jsx'),
   ],
@@ -45,9 +44,6 @@ const config = {
   },
   plugins: [
     new webpack.ProvidePlugin({
-      Buffer: ['buffer', 'Buffer'],
-      $: 'jquery',
-      'window.jQuery': 'jquery',
       AudioContext: ['standardized-audio-context', 'AudioContext'],
     }),
     new MiniCssExtractPlugin({
