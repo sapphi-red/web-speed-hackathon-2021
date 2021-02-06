@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { faImages, faMusic, faVideo } from '@fortawesome/free-solid-svg-icons';
+
 import { FontAwesomeIcon } from '../../foundation/FontAwesomeIcon';
 import { ModalErrorMessage } from '../../modal/ModalErrorMessage';
 import { ModalSubmitButton } from '../../modal/ModalSubmitButton';
@@ -84,19 +86,19 @@ const NewPostModalPage = ({ onSubmit, onResetError, isLoading, hasError }) => {
         <AttachFileInputButton
           accept="image/*"
           active={params.images.length !== 0}
-          icon={<FontAwesomeIcon styleType="solid" iconType="images" />}
+          icon={<FontAwesomeIcon icon={faImages} />}
           onChange={handleChangeImages}
         />
         <AttachFileInputButton
           accept="audio/*"
           active={params.sound !== undefined}
-          icon={<FontAwesomeIcon styleType="solid" iconType="music" />}
+          icon={<FontAwesomeIcon icon={faMusic} />}
           onChange={handleChangeSound}
         />
         <AttachFileInputButton
           accept="video/*"
           active={params.movie !== undefined}
-          icon={<FontAwesomeIcon styleType="solid" iconType="video" />}
+          icon={<FontAwesomeIcon icon={faVideo} />}
           onChange={handleChangeMovie}
         />
       </p>

@@ -1,6 +1,8 @@
 import classNames from 'classnames';
 import React from 'react';
 
+import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
+
 import { FontAwesomeIcon } from '../../foundation/FontAwesomeIcon';
 
 /**
@@ -13,7 +15,7 @@ const ModalErrorMessage = ({ children }) => {
   return (
     <span className={classNames('block h-6 text-red-600', { invisible: children === null })}>
       <span className="mr-1">
-        <FontAwesomeIcon styleType="solid" iconType="exclamation-circle" />
+        <FontAwesomeIcon icon={faExclamationCircle} />
       </span>
       {children}
     </span>

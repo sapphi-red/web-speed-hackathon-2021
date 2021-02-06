@@ -1,6 +1,8 @@
 import classNames from 'classnames';
 import React from 'react';
 
+import { faPlay, faPause } from '@fortawesome/free-solid-svg-icons'
+
 import { FontAwesomeIcon } from '../FontAwesomeIcon/FontAwesomeIcon';
 
 /**
@@ -37,7 +39,7 @@ const PausableMovie = ({ src }) => {
           { 'opacity-0 group-hover:opacity-100': isPlaying },
         )}
       >
-        <FontAwesomeIcon iconType={isPlaying ? 'pause' : 'play'} styleType="solid" />
+        <FontAwesomeIcon icon={isPlaying ? faPause : faPlay} />
       </div>
     </button>
   );

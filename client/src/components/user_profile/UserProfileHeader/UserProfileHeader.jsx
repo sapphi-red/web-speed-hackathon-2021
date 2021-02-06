@@ -1,6 +1,8 @@
 import FastAverageColor from 'fast-average-color';
 import React from 'react';
 
+import { faCalendarAlt } from '@fortawesome/free-regular-svg-icons';
+
 import { getProfileImagePath } from '../../../utils/get_path';
 import { formatDate } from '../../../utils/date';
 import { FontAwesomeIcon } from '../../foundation/FontAwesomeIcon';
@@ -41,7 +43,7 @@ const UserProfileHeader = ({ user }) => {
         <p className="pt-2">{user.description}</p>
         <p className="pt-2 text-gray-600 text-sm">
           <span className="pr-1">
-            <FontAwesomeIcon iconType="calendar-alt" styleType="regular" />
+            <FontAwesomeIcon icon={faCalendarAlt} />
           </span>
           <span>
             <time dateTime={new Date(user.createdAt).toISOString()}>
