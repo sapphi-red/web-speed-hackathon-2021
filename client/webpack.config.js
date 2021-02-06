@@ -17,7 +17,7 @@ const config = {
   ],
   output: {
     path: DIST_PATH,
-    filename: 'scripts/main.js',
+    filename: 'scripts/main-[contenthash:8].js',
   },
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -45,11 +45,11 @@ const config = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'styles/main.css',
+      filename: 'styles/main-[contenthash:8].css',
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(SRC_PATH, './index.html'),
-      inject: false,
+      inject: true,
     }),
   ],
   devServer: {
