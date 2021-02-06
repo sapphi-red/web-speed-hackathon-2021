@@ -13,7 +13,7 @@ const router = Router();
 
 router.use((_req, res, next) => {
   res.header({
-    'Cache-Control': 'max-age=0',
+    'Cache-Control': 'no-cache',
   });
   return next();
 });
