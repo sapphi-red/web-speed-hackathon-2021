@@ -4,7 +4,8 @@ import { useParams } from 'react-router-dom';
 import { UserProfilePage } from '../../components/user_profile/UserProfilePage';
 import { useRegisterOnReachBottom } from '../../hooks/use_register_on_reach_bottom';
 import { fetchTimelineByUser, fetchUser } from '../../utils/fetchers';
-import { NotFoundContainer } from '../NotFoundContainer';
+
+const NotFoundContainer = React.lazy(() => import('../NotFoundContainer'));
 
 const LIMIT = 10;
 
