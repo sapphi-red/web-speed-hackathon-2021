@@ -84,7 +84,7 @@ const SoundPlayer = ({ src, title, artist }) => {
         <p className="whitespace-nowrap text-sm font-bold overflow-hidden overflow-ellipsis">{title}</p>
         <p className="text-gray-500 whitespace-nowrap text-sm overflow-hidden overflow-ellipsis">{artist}</p>
         <AspectRatioBox aspectHeight={2} aspectWidth={15}>
-          <div className="w-full h-full" style={style}>
+          <div className="w-full h-full mt-2" style={style}>
             {soundArrayBuffer ? (
               <SoundWaveSVG soundData={soundArrayBuffer} />
             ) : null}
