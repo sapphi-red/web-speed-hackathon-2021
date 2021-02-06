@@ -3,20 +3,22 @@ import path from 'path'
 import { PUBLIC_PATH } from './src/paths.js'
 import sharp from 'sharp'
 
-// const dir = path.resolve(PUBLIC_PATH, './images')
-const dir = path.resolve(PUBLIC_PATH, './images/profiles')
+const dir = path.resolve(PUBLIC_PATH, './images')
+// const dir = path.resolve(PUBLIC_PATH, './images/profiles')
 
 const files = await fs.readdir(dir)
 
 for (const file of files) {
-  if (path.extname(file) !== '.jpg') continue
+  // if (path.extname(file) !== '.jpg') continue
 
-  const newFile = `${path.basename(file, '.jpg')}.webp`
+  // const newFile = `${path.basename(file, '.jpg')}.webp`
+  const newFile = `${path.basename(file, '.webp')}-2.webp`
 
   await sharp(path.resolve(dir, file))
     .resize({
       fit: 'contain',
-      width: 640,
+      //width: 640,
+      width: 320,
     })
     // .resize({
     //   fit: 'contain',

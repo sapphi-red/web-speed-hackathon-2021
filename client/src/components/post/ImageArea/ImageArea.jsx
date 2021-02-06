@@ -27,7 +27,7 @@ const ImageArea = ({ images }) => {
                 'col-span-2': images.length === 1,
               })}
             >
-              <CoveredImage alt={image.alt} src={getImagePath(image.id)} />
+              <CoveredImage alt={image.alt} src={getImagePath(image.id, images.length >= 2)} />
             </div>
           );
         })}

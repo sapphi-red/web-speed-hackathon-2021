@@ -32,6 +32,14 @@ router.post('/images', async (req, res) => {
   const filePath = path.resolve(UPLOAD_PATH, `./images/${imageId}.${EXTENSION}`);
   await fs.writeFile(filePath, converted);
 
+  const converted2 = await convertImage(req.body, {
+    width: 320, // 画像の縦横サイズを指定する
+    height: undefined,
+    extension: EXTENSION, // 画像の拡張子を指定する
+  });
+  const filePath2 = path.resolve(UPLOAD_PATH, `./images/${imageId}-2.${EXTENSION}`);
+  await fs.writeFile(filePath2, converted2);
+
   return res.status(200).type('application/json').send({ id: imageId });
 });
 
