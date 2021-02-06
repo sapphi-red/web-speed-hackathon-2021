@@ -2,8 +2,9 @@ import React from 'react';
 
 import { Modal } from '../../components/modal/Modal';
 import { useModalType } from '../../hooks/use_modal_type';
-import { AuthContainer } from '../AuthContainer';
-import { NewPostContainer } from '../NewPostContainer';
+
+const AuthContainer = React.lazy(() => import('../AuthContainer'));
+const NewPostContainer = React.lazy(() => import('../NewPostContainer'));
 
 /** @type {React.VFC} */
 const ModalContainer = () => {

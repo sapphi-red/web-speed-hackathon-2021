@@ -6,11 +6,12 @@ import { useActiveUser } from '../../hooks/use_active_user';
 import { useModalType } from '../../hooks/use_modal_type';
 import { fetchActiveUser } from '../../utils/fetchers';
 import { ModalContainer } from '../ModalContainer';
-import { NotFoundContainer } from '../NotFoundContainer';
-import { PostContainer } from '../PostContainer';
-import { TermContainer } from '../TermContainer';
-import { TimelineContainer } from '../TimelineContainer';
-import { UserProfileContainer } from '../UserProfileContainer';
+
+const TimelineContainer = React.lazy(() => import('../TimelineContainer'));
+const UserProfileContainer = React.lazy(() => import('../UserProfileContainer'));
+const PostContainer = React.lazy(() => import('../PostContainer'));
+const TermContainer = React.lazy(() => import('../TermContainer'));
+const NotFoundContainer = React.lazy(() => import('../NotFoundContainer'));
 
 /** @type {React.VFC} */
 const AppContainer = () => {
