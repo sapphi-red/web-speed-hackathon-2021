@@ -8,13 +8,14 @@ const mean = nums => {
   return total / nums.length
 }
 
-const zip = (arr, ...args) =>
-  Array.from(arr).map((value, idx) => [value, ...args.map(arr => arr[idx])])
+const bimean = (arr1, arr2) => arr1.map((n, i) => (n + arr2[i]) / 2)
 
 const chunk = (arr, chunkSize = 1, cache = []) => {
-  const tmp = [...arr]
   if (chunkSize <= 0) return cache
-  while (tmp.length) cache.push(tmp.splice(0, chunkSize))
+  const max = Math.ceil(arr.length / chunkSize)
+  for (let i = 0; i < max; i++) {
+    cache.push(arr.subarray(i * chunkSize, (i+1) * chunkSize))
+  }
   return cache
 }
 
@@ -41,7 +42,7 @@ const SoundWaveSVG = ({ soundData }) => {
     const rightData = buffer.getChannelData(1).map(Math.abs);
 
     // 左右の音声データの平均を取る
-    const normalized = zip(leftData, rightData).map(mean);
+    const normalized = bimean(leftData, rightData);
     // 100 個の chunk に分ける
     const chunks = chunk(normalized, Math.ceil(normalized.length / 100));
     // chunk ごとに平均を取る
