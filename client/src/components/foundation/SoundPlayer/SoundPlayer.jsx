@@ -83,13 +83,13 @@ const SoundPlayer = ({ src, title, artist }) => {
       <div className="flex flex-col flex-grow flex-shrink pt-2 min-w-0 h-full">
         <p className="whitespace-nowrap text-sm font-bold overflow-hidden overflow-ellipsis">{title}</p>
         <p className="text-gray-500 whitespace-nowrap text-sm overflow-hidden overflow-ellipsis">{artist}</p>
-        {soundArrayBuffer ? (
-          <AspectRatioBox aspectHeight={2} aspectWidth={15}>
-            <div className="w-full h-full" style={style}>
+        <AspectRatioBox aspectHeight={2} aspectWidth={15}>
+          <div className="w-full h-full" style={style}>
+            {soundArrayBuffer ? (
               <SoundWaveSVG soundData={soundArrayBuffer} />
-            </div>
-          </AspectRatioBox>
-        ) : null}
+            ) : null}
+          </div>
+        </AspectRatioBox>
       </div>
     </div>
   );
