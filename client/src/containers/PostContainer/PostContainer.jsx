@@ -23,10 +23,16 @@ const PostContainer = () => {
 
   React.useEffect(() => {
     (async () => {
-      setIsFetching(true);
       const post = await fetchPost({ postId });
       setPost(post);
+    })().finally(() => {
+      setIsLoading(false);
+    });
+  }, [postId]);
 
+  React.useEffect(() => {
+    (async () => {
+      setIsFetching(true);
       // 初回は10件のみ表示する
       const firstComments = await fetchCommentsByPost({
         postId,
@@ -36,7 +42,6 @@ const PostContainer = () => {
       setComments(firstComments);
       setOffset(LIMIT);
     })().finally(() => {
-      setIsLoading(false);
       setIsFetching(false);
     });
   }, [postId]);
