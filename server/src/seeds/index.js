@@ -1,4 +1,4 @@
-import { Image, Movie, Post, ProfileImage, Sound, User, Comment, PostsImagesRelation } from '../models';
+import { Image, Movie, Post, ProfileImage, Sound, User, Comment, PostsImagesRelation } from '../models/index.js';
 
 import comments from './comments.json';
 import images from './images.json';

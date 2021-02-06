@@ -5,8 +5,8 @@ import httpErrors from 'http-errors';
 import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
 
-import { convertSound } from '../../converters/convert_sound';
-import { UPLOAD_PATH } from '../../paths';
+import { convertSound } from '../../converters/convert_sound.js';
+import { UPLOAD_PATH } from '../../paths.js';
 
 // 変換した音声の拡張子
 const EXTENSION = 'mp3';

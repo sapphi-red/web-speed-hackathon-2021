@@ -1,8 +1,7 @@
 import Router from 'express-promise-router';
 import httpErrors from 'http-errors';
-import { ValidationError } from 'sequelize';
 
-import { User } from '../../models';
+import { User } from '../../models/index.js';
 
 const router = Router();
 

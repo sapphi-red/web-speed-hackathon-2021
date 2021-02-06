@@ -3,17 +3,15 @@
   "name": "@web-speed-hackathon-2021/server",
   "version": "0.0.1",
   "main": "src/index.js",
+  "type": "module",
   "scripts": {
     "build": "echo noop",
     "prestart": "npm-run-all prestart:clean prestart:init",
-    "start": "babel-node --experimental-wasm-threads --experimental-wasm-bulk-memory src/index.js",
+    "start": "node --experimental-json-modules --experimental-wasm-threads --experimental-wasm-bulk-memory src/index.js",
     "prestart:clean": "rimraf ../upload",
     "prestart:init": "mkdirp ../upload/images ../upload/movies ../upload/sounds"
   },
   "dependencies": {
-    "@babel/core": "^7.12.10",
-    "@babel/node": "^7.12.10",
-    "@babel/preset-env": "^7.12.11",
     "@ffmpeg/core": "^0.8.5",
     "@ffmpeg/ffmpeg": "^0.9.7",
     "bcrypt": "^5.0.0",

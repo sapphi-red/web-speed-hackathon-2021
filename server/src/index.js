@@ -1,8 +1,8 @@
 import http from 'http';
 
-import { app } from './app';
-import { insertSeeds } from './seeds';
-import { sequelize } from './sequelize';
+import { app } from './app.js';
+import { insertSeeds } from './seeds/index.js';
+import { sequelize } from './sequelize.js';
 
 async function main() {
   const server = http.createServer(app);

@@ -1,13 +1,13 @@
 import Router from 'express-promise-router';
 import httpErrors from 'http-errors';
-import { ValidationError } from 'sequelize';
+import Sequelize from 'sequelize';
 
-import { authRouter } from './api/auth';
-import { imageRouter } from './api/image';
-import { movieRouter } from './api/movie';
-import { postRouter } from './api/post';
-import { soundRouter } from './api/sound';
-import { userRouter } from './api/user';
+import { authRouter } from './api/auth.js';
+import { imageRouter } from './api/image.js';
+import { movieRouter } from './api/movie.js';
+import { postRouter } from './api/post.js';
+import { soundRouter } from './api/sound.js';
+import { userRouter } from './api/user.js';
 
 const router = Router();
 
@@ -19,7 +19,7 @@ router.use(soundRouter);
 router.use(authRouter);
 
 router.use(async (err, _req, _res, _next) => {
-  if (err instanceof ValidationError) {
+  if (err instanceof Sequelize.ValidationError) {
     throw new httpErrors.BadRequest();
   }
   throw err;

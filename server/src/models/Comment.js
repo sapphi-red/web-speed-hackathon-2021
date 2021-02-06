@@ -1,7 +1,7 @@
-import { DataTypes } from 'sequelize';
+import Sequelize from 'sequelize';
 import { ulid } from 'ulid';
 
-import { sequelize } from '../sequelize';
+import { sequelize } from '../sequelize.js';
 
 /**
  * @typedef {object} PostAttributes
@@ -20,13 +20,13 @@ const Comment = sequelize.define(
   'Comment',
   {
     id: {
-      type: DataTypes.STRING,
+      type: Sequelize.DataTypes.STRING,
       defaultValue: () => ulid(),
       allowNull: false,
       primaryKey: true,
     },
     text: {
-      type: DataTypes.STRING,
+      type: Sequelize.DataTypes.STRING,
       allowNull: false,
     },
   },

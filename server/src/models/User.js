@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
-import { Sequelize, DataTypes } from 'sequelize';
+import Sequelize from 'sequelize';
 
-import { sequelize } from '../sequelize';
+import { sequelize } from '../sequelize.js';
 
 /**
  * @typedef {object} UserAttributes
@@ -29,13 +29,13 @@ const User = sequelize.define(
   'User',
   {
     id: {
-      type: DataTypes.UUID,
+      type: Sequelize.DataTypes.UUID,
       defaultValue: Sequelize.UUIDV4,
       allowNull: false,
       primaryKey: true,
     },
     username: {
-      type: DataTypes.STRING,
+      type: Sequelize.DataTypes.STRING,
       allowNull: false,
       unique: true,
       validate: {
@@ -43,16 +43,16 @@ const User = sequelize.define(
       },
     },
     name: {
-      type: DataTypes.STRING,
+      type: Sequelize.DataTypes.STRING,
       allowNull: false,
     },
     description: {
-      type: DataTypes.STRING,
+      type: Sequelize.DataTypes.STRING,
       allowNull: false,
       defaultValue: '',
     },
     password: {
-      type: DataTypes.STRING,
+      type: Sequelize.DataTypes.STRING,
       allowNull: false,
       get() {
         return undefined;

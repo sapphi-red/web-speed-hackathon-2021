@@ -5,8 +5,8 @@ import httpErrors from 'http-errors';
 import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
 
-import { convertMovie } from '../../converters/convert_movie';
-import { UPLOAD_PATH } from '../../paths';
+import { convertMovie } from '../../converters/convert_movie.js';
+import { UPLOAD_PATH } from '../../paths.js';
 
 // 変換した動画の拡張子
 const EXTENSION = 'gif';

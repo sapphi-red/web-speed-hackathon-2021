@@ -1,6 +1,6 @@
-import { Sequelize } from 'sequelize';
+import Sequelize from 'sequelize';
 
-import { DATABASE_PATH } from './paths';
+import { DATABASE_PATH } from './paths.js';
 
 const sequelize = new Sequelize({
   dialect: 'sqlite',

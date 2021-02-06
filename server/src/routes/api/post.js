@@ -1,7 +1,7 @@
 import Router from 'express-promise-router';
 import httpErrors from 'http-errors';
 
-import { Post, Comment } from '../../models';
+import { Post, Comment } from '../../models/index.js';
 
 const router = Router();
 

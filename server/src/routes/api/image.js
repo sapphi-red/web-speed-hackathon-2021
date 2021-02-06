@@ -5,8 +5,8 @@ import httpErrors from 'http-errors';
 import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
 
-import { convertImage } from '../../converters/convert_image';
-import { UPLOAD_PATH } from '../../paths';
+import { convertImage } from '../../converters/convert_image.js';
+import { UPLOAD_PATH } from '../../paths.js';
 
 // 変換した画像の拡張子
 const EXTENSION = 'jpg';

@@ -1,4 +1,4 @@
-import { ffmpeg } from '../ffmpeg';
+import { ffmpeg } from '../ffmpeg.js';
 
 /**
  * 先頭 5 秒のみ、正方形にくり抜かれた無音動画を作成します

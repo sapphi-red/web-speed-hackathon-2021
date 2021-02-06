@@ -2,8 +2,8 @@ import bodyParser from 'body-parser';
 import Express from 'express';
 import session from 'express-session';
 
-import { apiRouter } from './routes/api';
-import { staticRouter } from './routes/static';
+import { apiRouter } from './routes/api.js';
+import { staticRouter } from './routes/static.js';
 
 const app = Express();
 

@@ -22,9 +22,9 @@ const PausableMovie = ({ src }) => {
 
   React.useEffect(() => {
     (async () => {
-      const data = await fetchBinary({ url: src });
+      const data = fetchBinary({ url: src });
       // gifler.Gif は GIF を解析する
-      const gif = new gifler.Gif(Promise.resolve(data));
+      const gif = new gifler.Gif(data);
       // gif.animate でアニメーションを制御 Animator が作られる
       const animator = await gif.animate(canvasRef.current);
       animatorRef.current = animator;

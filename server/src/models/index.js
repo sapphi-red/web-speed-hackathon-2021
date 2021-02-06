@@ -1,11 +1,11 @@
-import { Comment } from './Comment';
-import { Image } from './Image';
-import { Movie } from './Movie';
-import { Post } from './Post';
-import { PostsImagesRelation } from './PostsImagesRelation';
-import { ProfileImage } from './ProfileImage';
-import { Sound } from './Sound';
-import { User } from './User';
+import { Comment } from './Comment.js';
+import { Image } from './Image.js';
+import { Movie } from './Movie.js';
+import { Post } from './Post.js';
+import { PostsImagesRelation } from './PostsImagesRelation.js';
+import { ProfileImage } from './ProfileImage.js';
+import { Sound } from './Sound.js';
+import { User } from './User.js';
 
 User.hasMany(Post, {
   as: 'posts',

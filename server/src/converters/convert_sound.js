@@ -1,4 +1,4 @@
-import { ffmpeg } from '../ffmpeg';
+import { ffmpeg } from '../ffmpeg.js';
 
 /**
  * @param {Buffer} buffer

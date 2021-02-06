@@ -1,6 +1,6 @@
-import { Sequelize, DataTypes } from 'sequelize';
+import Sequelize from 'sequelize';
 
-import { sequelize } from '../sequelize';
+import { sequelize } from '../sequelize.js';
 
 /**
  * @typedef {object} ProfileImageAttributes
@@ -15,13 +15,13 @@ import { sequelize } from '../sequelize';
 /** @type {import('sequelize').ModelCtor<ProfileImageModel>} */
 const ProfileImage = sequelize.define('ProfileImage', {
   id: {
-    type: DataTypes.UUID,
+    type: Sequelize.DataTypes.UUID,
     defaultValue: Sequelize.UUIDV4,
     allowNull: false,
     primaryKey: true,
   },
   alt: {
-    type: DataTypes.STRING,
+    type: Sequelize.DataTypes.STRING,
     allowNull: false,
     defaultValue: '',
   },

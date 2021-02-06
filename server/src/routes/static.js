@@ -2,7 +2,7 @@ import history from 'connect-history-api-fallback';
 import Router from 'express-promise-router';
 import serveStatic from 'serve-static';
 
-import { PUBLIC_PATH, CLIENT_DIST_PATH, UPLOAD_PATH } from '../paths';
+import { PUBLIC_PATH, CLIENT_DIST_PATH, UPLOAD_PATH } from '../paths.js';
 
 const router = Router();
 
