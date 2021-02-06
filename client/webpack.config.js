@@ -11,8 +11,6 @@ const DIST_PATH = path.resolve(__dirname, '../dist');
 /** @type {import('webpack').Configuration} */
 const config = {
   entry: [
-    'core-js',
-    'regenerator-runtime/runtime',
     'jquery-binarytransport',
     path.resolve(SRC_PATH, './index.css'),
     path.resolve(SRC_PATH, './index.jsx'),
