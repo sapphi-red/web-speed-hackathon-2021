@@ -32,7 +32,7 @@ const SoundWaveSVG = ({ soundData }) => {
   const [{ max, peaks }, setPeaks] = React.useState({ max: 0, peaks: [] });
 
   React.useEffect(async () => {
-    const audioCtx = new AudioContext();
+    const audioCtx = new OfflineAudioContext(2, soundData.byteLength, 44100);
 
     // 音声をデコードする
     const buffer = await audioCtx.decodeAudioData(soundData.slice(0));

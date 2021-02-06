@@ -56,6 +56,7 @@ const SoundPlayer = ({ src, title, artist }) => {
 
   const progress = currentTimeRatio * 100
   const style = {
+    aspectRatio: '15 / 2',
     WebkitMaskImage:
       'linear-gradient(' +
       'to right,' +
@@ -82,10 +83,8 @@ const SoundPlayer = ({ src, title, artist }) => {
         <p className="text-gray-500 whitespace-nowrap text-sm overflow-hidden overflow-ellipsis">{artist}</p>
         {soundArrayBuffer ? (
           <AspectRatioBox aspectHeight={2} aspectWidth={15}>
-            <div className="relative mt-2 w-full h-full">
-              <div className="absolute inset-0 w-full h-full" style={style}>
-                <SoundWaveSVG soundData={soundArrayBuffer} />
-              </div>
+            <div className="w-full h-full" style={style}>
+              <SoundWaveSVG soundData={soundArrayBuffer} />
             </div>
           </AspectRatioBox>
         ) : null}
