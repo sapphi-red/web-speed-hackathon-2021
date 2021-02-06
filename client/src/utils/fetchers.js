@@ -92,7 +92,7 @@ async function fetchTimelineByUser({ userId, limit, offset }) {
   }
 
   return fetchJson({
-    url: `/api/v1/users/${userId}/posts`
+    url: `/api/v1/users/${userId}/posts?${searchParams}`
   })
 }
 

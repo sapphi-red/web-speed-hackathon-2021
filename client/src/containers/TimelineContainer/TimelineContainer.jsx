@@ -19,9 +19,9 @@ const TimelineContainer = () => {
     (async () => {
       setIsFetching(true);
       // 初回は10件のみ表示する
-      const allTimeline = await fetchTimeline({ limit: LIMIT, offset: 0 });
+      const firstTimeline = await fetchTimeline({ limit: LIMIT, offset: 0 });
 
-      setTimeline(allTimeline);
+      setTimeline(firstTimeline);
       setOffset(LIMIT);
     })().finally(() => {
       setIsLoading(false);
