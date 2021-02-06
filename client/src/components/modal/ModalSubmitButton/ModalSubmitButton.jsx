@@ -1,6 +1,8 @@
 import classNames from 'classnames';
 import React from 'react';
 
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
+
 import { FontAwesomeIcon } from '../../foundation/FontAwesomeIcon';
 
 /**
@@ -25,7 +27,7 @@ const ModalSubmitButton = ({ disabled, loading, children, onClick }) => {
       {loading ? (
         <span className="pr-2">
           <span className="inline-block animate-spin">
-            <FontAwesomeIcon styleType="solid" iconType="circle-notch" />
+            <FontAwesomeIcon icon={faCircleNotch} />
           </span>
         </span>
       ) : null}
