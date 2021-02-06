@@ -23,10 +23,16 @@ const UserProfileContainer = () => {
 
   React.useEffect(() => {
     (async () => {
-      setIsFetching(true);
       const user = await fetchUser({ userId });
       setUser(user);
+    })().finally(() => {
+      setIsLoading(false);
+    });
+  }, [userId]);
 
+  React.useEffect(() => {
+    (async () => {
+      setIsFetching(true);
       // 初回は10件のみ表示する
       const firstTimeline = await fetchTimelineByUser({
         userId,
@@ -36,7 +42,6 @@ const UserProfileContainer = () => {
       setTimeline(firstTimeline);
       setOffset(LIMIT);
     })().finally(() => {
-      setIsLoading(false);
       setIsFetching(false);
     });
   }, [userId]);
