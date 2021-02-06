@@ -1,5 +1,3 @@
-import { gzip } from 'pako';
-
 const createFetchError = res =>
   new Error(`Failed to fetch(${res.status}): ${res.statusText}`)
 
@@ -126,15 +124,11 @@ async function fetchActiveUser() {
  * @returns {Promise<User>}
  */
 async function sendRegister(params) {
-  const uint8Array = new TextEncoder().encode(JSON.stringify(params));
-  const compressed = gzip(uint8Array);
-
   const res = await fetch('/api/v1/signup', {
     method: 'POST',
-    body: compressed.buffer,
+    body: JSON.stringify(params),
     headers: {
-      'Content-Type': 'application/json',
-      'Content-Encoding': 'gzip',
+      'Content-Type': 'application/json'
     }
   });
   if (!res.ok) throw createFetchError(res)
@@ -148,15 +142,11 @@ async function sendRegister(params) {
  * @returns {Promise<User>}
  */
 async function sendSignin(params) {
-  const uint8Array = new TextEncoder().encode(JSON.stringify(params));
-  const compressed = gzip(uint8Array);
-
   const res = await fetch('/api/v1/signin', {
     method: 'POST',
-    body: compressed.buffer,
+    body: JSON.stringify(params),
     headers: {
       'Content-Type': 'application/json',
-      'Content-Encoding': 'gzip',
     }
   });
   if (!res.ok) throw createFetchError(res)
@@ -230,15 +220,11 @@ async function sendNewPost({ movie, sound, images, text }) {
     images: images ? await Promise.all(images.map((image) => sendNewImage({ image }))) : [],
   };
 
-  const uint8Array = new TextEncoder().encode(JSON.stringify(payload));
-  const compressed = gzip(uint8Array);
-
   const res = await fetch('/api/v1/posts', {
     method: 'POST',
-    body: compressed.buffer,
+    body: JSON.stringify(payload),
     headers: {
       'Content-Type': 'application/json',
-      'Content-Encoding': 'gzip',
     }
   });
   if (!res.ok) throw createFetchError(res)
