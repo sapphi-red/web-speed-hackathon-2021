@@ -3,7 +3,8 @@ import sharp from 'sharp';
 /**
  * @param {Buffer} buffer
  * @param {object} options
- * @param {number} [options.size]
+ * @param {number} [options.width]
+ * @param {number} [options.height]
  * @param {number} [options.extension]
  * @returns {Promise<Uint8Array>}
  */
@@ -11,10 +12,10 @@ async function convertImage(buffer, options) {
   return sharp(buffer)
     .resize({
       fit: 'contain',
-      width: options.size,
-      height: options.size,
+      width: options.width,
+      height: options.height,
     })
-    .toFormat(options.extension ?? 'jpeg')
+    .toFormat(options.extension ?? 'webp')
     .toBuffer();
 }
 

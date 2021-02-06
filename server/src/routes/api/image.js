@@ -9,7 +9,7 @@ import { convertImage } from '../../converters/convert_image.js';
 import { UPLOAD_PATH } from '../../paths.js';
 
 // 変換した画像の拡張子
-const EXTENSION = 'jpg';
+const EXTENSION = 'webp';
 
 const router = Router();
 
@@ -24,7 +24,8 @@ router.post('/images', async (req, res) => {
   const imageId = uuidv4();
 
   const converted = await convertImage(req.body, {
-    size: undefined, // 画像の縦横サイズを指定する (undefined は元動画に合わせる)
+    width: 640, // 画像の縦横サイズを指定する
+    height: undefined,
     extension: EXTENSION, // 画像の拡張子を指定する
   });
 
