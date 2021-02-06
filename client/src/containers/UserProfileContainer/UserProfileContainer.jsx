@@ -51,7 +51,7 @@ const UserProfileContainer = () => {
   React.useEffect(() => {
     if (isLoading) {
       document.title = '読込中- CAwitter'
-    } else {
+    } else if (user !== null) {
       document.title = `${user.name} さんのタイムライン- CAwitter`
     }
   }, [isLoading, user])
