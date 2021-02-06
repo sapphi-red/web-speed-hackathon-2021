@@ -24,7 +24,7 @@ const UserProfileHeader = ({ user }) => {
       const image = new Image();
       image.src = getProfileImagePath(user.profileImage.id);
 
-      const { rgb } = await fac.getColorAsync(image, { mode: 'precision' });
+      const { rgb } = await fac.getColorAsync(image, { mode: 'speed' });
       setAverageColor(rgb);
 
       fac.destroy();
