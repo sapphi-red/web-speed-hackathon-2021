@@ -9,30 +9,39 @@ const LIMIT = 10;
 /** @type {React.VFC} */
 const TimelineContainer = () => {
   const [isLoading, setIsLoading] = React.useState(true);
+  const [isFetching, setIsFetching] = React.useState(false);
 
-  const [allTimeline, setAllTimeline] = React.useState([]);
   const [timeline, setTimeline] = React.useState([]);
 
   const [offset, setOffset] = React.useState(0);
 
   React.useEffect(() => {
     (async () => {
-      const allTimeline = await fetchTimeline({ limit: undefined, offset: undefined });
-      setAllTimeline(allTimeline);
-
+      setIsFetching(true);
       // 初回は10件のみ表示する
-      setTimeline((prev) => [...prev, ...allTimeline.slice(offset, offset + LIMIT)]);
-      setOffset((offset) => offset + LIMIT);
+      const allTimeline = await fetchTimeline({ limit: LIMIT, offset: 0 });
+
+      setTimeline(allTimeline);
+      setOffset(LIMIT);
     })().finally(() => {
       setIsLoading(false);
+      setIsFetching(false);
     });
   }, []);
 
   // 画面最下部までスクロールしたときには、10件読み込む
   useRegisterOnReachBottom(() => {
-    setTimeline((prev) => [...prev, ...allTimeline.slice(offset, offset + LIMIT)]);
-    setOffset((offset) => offset + LIMIT);
-  }, [allTimeline, offset]);
+    if (isFetching) return
+    (async () => {
+      setIsFetching(true);
+      const next = await fetchTimeline({ limit: LIMIT, offset });
+
+      setTimeline((prev) => [...prev, ...next]);
+      setOffset((offset) => offset + LIMIT);
+    })().finally(() => {
+      setIsFetching(false);
+    });
+  }, [isFetching, timeline, offset]);
 
   React.useEffect(() => {
     if (isLoading) {
