@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import React from 'react';
 
 /**
@@ -16,7 +15,7 @@ const CoveredImage = ({ src, alt }) => {
     <div className="w-full h-full overflow-hidden">
       <img
         alt={alt}
-        className={classNames('w-full h-full max-w-none object-cover')}
+        className="w-full h-full max-w-none object-cover"
         src={src}
       />
     </div>
