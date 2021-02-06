@@ -13,6 +13,8 @@ router.use(
   serveStatic(UPLOAD_PATH, {
     etag: true,
     lastModified: true,
+    maxAge: 604800 * 1000,
+    immutable: true,
   }),
 );
 
@@ -20,6 +22,8 @@ router.use(
   serveStatic(PUBLIC_PATH, {
     etag: true,
     lastModified: true,
+    maxAge: 604800 * 1000,
+    immutable: true,
   }),
 );
 
@@ -27,6 +31,8 @@ router.use(
   serveStatic(CLIENT_DIST_PATH, {
     etag: true,
     lastModified: true,
+    maxAge: 604800 * 1000,
+    immutable: true,
   }),
 );
 

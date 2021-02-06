@@ -11,6 +11,13 @@ import { userRouter } from './api/user.js';
 
 const router = Router();
 
+router.use((_req, res, next) => {
+  res.header({
+    'Cache-Control': 'max-age=0',
+  });
+  return next();
+});
+
 router.use(userRouter);
 router.use(postRouter);
 router.use(movieRouter);
