@@ -7,17 +7,16 @@
   "scripts": {
     "build": "echo noop",
     "prestart": "npm-run-all prestart:clean prestart:init",
-    "start": "node --experimental-json-modules --experimental-wasm-threads --experimental-wasm-bulk-memory src/index.js",
+    "start": "node --experimental-json-modules --experimental-wasm-modules --experimental-wasm-threads --experimental-wasm-bulk-memory src/index.js",
     "prestart:clean": "rimraf ../upload",
     "prestart:init": "mkdirp ../upload/images ../upload/movies ../upload/sounds",
     "convert-mov": "node --experimental-wasm-threads --experimental-wasm-bulk-memory convert_gif2webm.js",
     "convert-img": "node convert_jpg2webp.js",
-    "generate-sound-meta": "node generate_sound_meta.js"
+    "generate-sound-meta": "node  --experimental-wasm-threads --experimental-wasm-bulk-memory generate_sound_meta.js"
   },
   "dependencies": {
     "@ffmpeg/core": "^0.8.5",
     "@ffmpeg/ffmpeg": "^0.9.7",
-    "audio-decode": "^1.4.0",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "connect-history-api-fallback": "^1.6.0",
@@ -33,7 +32,8 @@
     "sharp": "^0.27.1",
     "sqlite3": "5.0.0",
     "ulid": "^2.3.0",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "web-audio-engine": "^0.13.4"
   },
   "devDependencies": {
     "@types/bcrypt": "^10.0.28-alpha",

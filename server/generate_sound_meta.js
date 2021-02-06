@@ -12,7 +12,7 @@ for (const file of files) {
 
   const metaFile = `${file}.meta.svg`;
 
-  const buffer = await fs.readFile(path.resolve(dir, file), 'binary');
+  const buffer = await fs.readFile(path.resolve(dir, file));
   const svgText = await createSvgTextFromBuffer(buffer);
   await fs.writeFile(path.resolve(dir, metaFile), svgText, 'utf8');
 

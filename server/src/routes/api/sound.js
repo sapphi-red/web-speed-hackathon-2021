@@ -4,7 +4,7 @@ import Router from 'express-promise-router';
 import httpErrors from 'http-errors';
 import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
-import audioDecode from 'audio-decode';
+import { OfflineAudioContext } from 'web-audio-engine';
 
 import { convertSound } from '../../converters/convert_sound.js';
 import { UPLOAD_PATH } from '../../paths.js';
@@ -69,7 +69,11 @@ const createSvgTextFromPeakRatios = ratios => {
 }
 
 export const createSvgTextFromBuffer = async buffer => {
-  const audioBuffer = await audioDecode(buffer);
+  const wavBuffer = (await convertSound(buffer, {
+    extension: 'wav',
+  })).buffer;
+  const audioCtx = new OfflineAudioContext(2, wavBuffer.byteLength, 48000);
+  const audioBuffer = await audioCtx.decodeAudioData(wavBuffer.slice(0));
   const ratios = getPeakRatiosFromAudioBuffer(audioBuffer);
   return createSvgTextFromPeakRatios(ratios);
 }
@@ -92,7 +96,7 @@ router.post('/sounds', async (req, res) => {
   await fs.writeFile(filePath, converted);
 
   const volumeSvgPath = path.resolve(UPLOAD_PATH, `./sounds/${soundId}.${EXTENSION}.meta.svg`);
-  const svgText = await createSvgTextFromBuffer(converted.buffer);
+  const svgText = await createSvgTextFromBuffer(converted);
   await fs.writeFile(volumeSvgPath, svgText, 'utf8');
 
   return res.status(200).type('application/json').send({ id: soundId });
