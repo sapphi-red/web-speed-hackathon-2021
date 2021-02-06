@@ -50,7 +50,7 @@ const PostContainer = () => {
   React.useEffect(() => {
     if (isLoading) {
       document.title = '読込中- CAwitter'
-    } else {
+    } else if (post !== null) {
       document.title = `${post.user.name} さんのつぶやき- CAwitter`
     }
   }, [isLoading, post])
