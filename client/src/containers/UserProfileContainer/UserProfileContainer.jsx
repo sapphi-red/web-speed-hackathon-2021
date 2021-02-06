@@ -1,5 +1,4 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom';
 
 import { UserProfilePage } from '../../components/user_profile/UserProfilePage';
@@ -49,26 +48,23 @@ const UserProfileContainer = () => {
     setOffset((offset) => offset + LIMIT);
   }, [allTimeline, offset]);
 
+  React.useEffect(() => {
+    if (isLoading) {
+      document.title = '読込中- CAwitter'
+    } else {
+      document.title = `${user.name} さんのタイムライン- CAwitter`
+    }
+  }, [isLoading, user])
+
   if (isLoading) {
-    return (
-      <Helmet>
-        <title>読込中- CAwitter</title>
-      </Helmet>
-    );
+    return null;
   }
 
   if (user === null) {
     return <NotFoundContainer />;
   }
 
-  return (
-    <>
-      <Helmet>
-        <title>{user.name} さんのタイムライン- CAwitter</title>
-      </Helmet>
-      <UserProfilePage timeline={timeline} user={user} />
-    </>
-  );
+  return <UserProfilePage timeline={timeline} user={user} />;
 };
 
 export { UserProfileContainer };

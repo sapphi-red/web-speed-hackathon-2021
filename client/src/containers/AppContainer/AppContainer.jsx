@@ -1,5 +1,4 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import { AppPage } from '../../components/application/AppPage';
@@ -28,12 +27,14 @@ const AppContainer = () => {
     });
   }, []);
 
+  React.useEffect(() => {
+    if (isLoading) {
+      document.title = '読込中- CAwitter'
+    }
+  }, [isLoading])
+
   if (isLoading) {
-    return (
-      <Helmet>
-        <title>読込中- CAwitter</title>
-      </Helmet>
-    );
+    return null;
   }
 
   return (

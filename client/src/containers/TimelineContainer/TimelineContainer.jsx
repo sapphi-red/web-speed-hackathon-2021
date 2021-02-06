@@ -1,5 +1,4 @@
 import React from 'react';
-import Helmet from 'react-helmet';
 
 import { TimelinePage } from '../../components/timeline/TimelinePage';
 import { useRegisterOnReachBottom } from '../../hooks/use_register_on_reach_bottom';
@@ -35,22 +34,19 @@ const TimelineContainer = () => {
     setOffset((offset) => offset + LIMIT);
   }, [allTimeline, offset]);
 
+  React.useEffect(() => {
+    if (isLoading) {
+      document.title = '読込中- CAwitter'
+    } else {
+      document.title = 'タイムライン- CAwitter'
+    }
+  }, [isLoading])
+
   if (isLoading) {
-    return (
-      <Helmet>
-        <title>読込中- CAwitter</title>
-      </Helmet>
-    );
+    return null;
   }
 
-  return (
-    <>
-      <Helmet>
-        <title>タイムライン- CAwitter</title>
-      </Helmet>
-      <TimelinePage timeline={timeline} />
-    </>
-  );
+  return <TimelinePage timeline={timeline} />;
 };
 
 export { TimelineContainer };
