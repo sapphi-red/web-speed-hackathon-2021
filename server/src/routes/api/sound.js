@@ -17,6 +17,7 @@ const router = Router();
 const mean = nums => {
   let total = 0
   for (const n of nums) {
+    if (!Number.isFinite(n)) continue
     total += n
   }
   return total / nums.length
