@@ -4,11 +4,11 @@
   "license": "UNLICENSED",
   "version": "0.0.1",
   "scripts": {
-    "analyze": "cross-env NODE_ENV=production webpack --analyze",
-    "analyze-dev": "cross-env NODE_ENV=development webpack --analyze",
+    "analyze": "webpack --mode=production --analyze",
+    "analyze-dev": "webpack --mode=development --analyze",
     "prebuild": "rimraf ../dist",
-    "build": "cross-env NODE_ENV=production webpack",
-    "develop": "cross-env NODE_ENV=development webpack serve"
+    "build": "webpack --mode=production",
+    "develop": "webpack --mode=development serve"
   },
   "dependencies": {
     "buffer": "^6.0.3",

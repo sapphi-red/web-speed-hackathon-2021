@@ -10,7 +10,6 @@ const DIST_PATH = path.resolve(__dirname, '../dist');
 
 /** @type {import('webpack').Configuration} */
 const config = {
-  mode: 'none',
   entry: [
     'core-js',
     'regenerator-runtime/runtime',
@@ -53,7 +52,6 @@ const config = {
       'window.jQuery': 'jquery',
       AudioContext: ['standardized-audio-context', 'AudioContext'],
     }),
-    new webpack.EnvironmentPlugin(['NODE_ENV']),
     new MiniCssExtractPlugin({
       filename: 'styles/main.css',
     }),
@@ -62,7 +60,6 @@ const config = {
       inject: false,
     }),
   ],
-  devtool: 'inline-source-map',
   devServer: {
     host: '0.0.0.0',
     port: 8080,
