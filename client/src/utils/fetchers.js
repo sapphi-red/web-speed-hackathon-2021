@@ -51,7 +51,7 @@ async function fetchCommentsByPost({ postId, limit, offset }) {
   }
 
   return fetchJson({
-    url: `/api/v1/posts/${postId}/comments`
+    url: `/api/v1/posts/${postId}/comments?${searchParams}`
   })
 }
 

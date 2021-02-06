@@ -13,39 +13,51 @@ const PostContainer = () => {
   const { postId } = useParams();
 
   const [isLoading, setIsLoading] = React.useState(true);
+  const [isFetching, setIsFetching] = React.useState(false);
+
   const [post, setPost] = React.useState(null);
 
-  const [allComments, setAllComments] = React.useState([]);
   const [comments, setComments] = React.useState([]);
 
   const [offset, setOffset] = React.useState(0);
 
   React.useEffect(() => {
     (async () => {
-      setIsLoading(true);
+      setIsFetching(true);
       const post = await fetchPost({ postId });
       setPost(post);
 
-      const allComments = await fetchCommentsByPost({
-        postId,
-        limit: undefined,
-        offset: undefined,
-      });
-      setAllComments(allComments);
-
       // 初回は10件のみ表示する
-      setComments((prev) => [...prev, ...allComments.slice(offset, offset + LIMIT)]);
-      setOffset((offset) => offset + LIMIT);
+      const firstComments = await fetchCommentsByPost({
+        postId,
+        limit: LIMIT,
+        offset: 0,
+      });
+      setComments(firstComments);
+      setOffset(LIMIT);
     })().finally(() => {
       setIsLoading(false);
+      setIsFetching(false);
     });
   }, [postId]);
 
   // 画面最下部までスクロールしたときには、10件読み込む
   useRegisterOnReachBottom(() => {
-    setComments((prev) => [...prev, ...allComments.slice(offset, offset + LIMIT)]);
-    setOffset((offset) => offset + LIMIT);
-  }, [allComments, offset]);
+    if (isFetching) return
+    (async () => {
+      setIsFetching(true);
+      const next = await fetchCommentsByPost({
+        postId,
+        limit: LIMIT,
+        offset,
+      });
+
+      setComments((prev) => [...prev, ...next]);
+      setOffset((offset) => offset + LIMIT);
+    })().finally(() => {
+      setIsFetching(false);
+    });
+  }, [isFetching, comments, offset]);
 
   React.useEffect(() => {
     if (isLoading) {
