@@ -54,6 +54,17 @@ const SoundPlayer = ({ src, title, artist }) => {
     setCurrentTimeRatio(audioRef.current?.currentTime / audioRef.current?.duration);
   }, []);
 
+  const progress = currentTimeRatio * 100
+  const style = {
+    WebkitMaskImage:
+      'linear-gradient(' +
+      'to right,' +
+      'rgba(0, 0, 0, 1) 0%,' +
+      `rgba(0, 0, 0, 1) ${progress}%,` +
+      `rgba(0, 0, 0, .25) ${progress}%,` +
+      'rgba(0, 0, 0, .25) 100%)'
+  }
+
   return (
     <div className="flex items-center justify-center w-full h-full">
       {blobUrl ? <audio ref={audioRef} loop={true} src={blobUrl} onTimeUpdate={handleTimeUpdate} /> : null}
@@ -72,14 +83,7 @@ const SoundPlayer = ({ src, title, artist }) => {
         {soundArrayBuffer ? (
           <AspectRatioBox aspectHeight={2} aspectWidth={15}>
             <div className="relative mt-2 w-full h-full">
-              <div className="absolute inset-0 w-full h-full opacity-25">
-                <SoundWaveSVG soundData={soundArrayBuffer} />
-              </div>
-              <div
-                className="absolute inset-0 w-full h-full"
-                // 再生したところまでの波形を clip-path で切り取る
-                style={{ clipPath: `inset(0 ${(1 - currentTimeRatio) * 100}% 0 0)` }}
-              >
+              <div className="absolute inset-0 w-full h-full" style={style}>
                 <SoundWaveSVG soundData={soundArrayBuffer} />
               </div>
             </div>
