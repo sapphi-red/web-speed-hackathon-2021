@@ -17,6 +17,7 @@ const config = {
   ],
   output: {
     path: DIST_PATH,
+    publicPath: '/',
     filename: 'scripts/main-[contenthash:8].js',
   },
   resolve: {
