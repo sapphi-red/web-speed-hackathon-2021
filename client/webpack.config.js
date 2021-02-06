@@ -53,9 +53,7 @@ const config = {
       'window.jQuery': 'jquery',
       AudioContext: ['standardized-audio-context', 'AudioContext'],
     }),
-    new webpack.EnvironmentPlugin({
-      NODE_ENV: 'development',
-    }),
+    new webpack.EnvironmentPlugin(['NODE_ENV']),
     new MiniCssExtractPlugin({
       filename: 'styles/main.css',
     }),
