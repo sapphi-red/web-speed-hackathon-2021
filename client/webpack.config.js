@@ -44,9 +44,6 @@ const config = {
     ],
   },
   plugins: [
-    new webpack.ProvidePlugin({
-      AudioContext: ['standardized-audio-context', 'AudioContext'],
-    }),
     new MiniCssExtractPlugin({
       filename: 'styles/main.css',
     }),
