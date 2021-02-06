@@ -17,25 +17,16 @@ const AppContainer = () => {
   const [_modalType, setModalType] = useModalType();
   const [_activeUser, setActiveUser] = useActiveUser();
 
-  const [isLoading, setIsLoading] = React.useState(true);
   React.useEffect(() => {
-    (async () => {
-      const user = await fetchActiveUser();
-      setActiveUser(user);
-    })().finally(() => {
-      setIsLoading(false);
-    });
+    ;(async () => {
+      try {
+        const user = await fetchActiveUser();
+        setActiveUser(user);
+      } catch {
+        setActiveUser(null)
+      }
+    })()
   }, []);
-
-  React.useEffect(() => {
-    if (isLoading) {
-      document.title = '読込中- CAwitter'
-    }
-  }, [isLoading])
-
-  if (isLoading) {
-    return null;
-  }
 
   return (
     <BrowserRouter>
