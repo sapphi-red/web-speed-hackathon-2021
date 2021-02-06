@@ -10,7 +10,8 @@
     "start": "node --experimental-json-modules --experimental-wasm-threads --experimental-wasm-bulk-memory src/index.js",
     "prestart:clean": "rimraf ../upload",
     "prestart:init": "mkdirp ../upload/images ../upload/movies ../upload/sounds",
-    "convert": "node --experimental-wasm-threads --experimental-wasm-bulk-memory convert_gif2webm.js"
+    "convert-mov": "node --experimental-wasm-threads --experimental-wasm-bulk-memory convert_gif2webm.js",
+    "convert-img": "node convert_jpg2webp.js"
   },
   "dependencies": {
     "@ffmpeg/core": "^0.8.5",
