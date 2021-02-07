@@ -7,7 +7,8 @@ const apiMiddleware = handler => async (req, reply) => {
     return res
   } catch (e) {
     if (e instanceof Sequelize.ValidationError) {
-      throw fastify.httpErrors.badRequest();
+      reply.code(400)
+      return { message: e.message }
     }
     if (!('status' in e) || e.status === 500) {
       console.error(e);
