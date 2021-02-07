@@ -1,26 +1,40 @@
-import bodyParser from 'body-parser';
-import Express from 'express';
-import session from 'express-session';
+import fastify from 'fastify';
+import fastifySession from 'fastify-session';
+import fastifyCookie from 'fastify-cookie';
+import fastifySensible from 'fastify-sensible';
 
 import { apiRouter } from './routes/api.js';
 import { staticRouter } from './routes/static.js';
 
-const app = Express();
+const app = fastify({
+  logger: false,
+  trustProxy: true,
+})
+app.register(fastifyCookie);
+app.register(fastifySession, {
+  cookieName: 'wshsid',
+  cookie: { secure: false },
+  secret: 'secretsecretsecretsecretsecretsecret',
+  saveUninitialized: false,
+})
+app.register(fastifySensible);
 
-app.set('trust proxy', true);
+app.addContentTypeParser(
+  ['application/octet-stream'],
+  {
+    bodyLimit: 1048576 * 10, // 10mb
+  },
+  function (request, payload, next) {
+    let dataBody = [];
+    payload.on('data', (chunk) => {
+      dataBody.push(chunk)
+    });
 
-app.use(
-  session({
-    resave: false,
-    saveUninitialized: false,
-    secret: 'secret',
-    proxy: true,
-  }),
+    payload.on('end', () => next(null, Buffer.concat(dataBody)));
+  }
 );
-app.use(bodyParser.json());
-app.use(bodyParser.raw({ limit: '10mb' }));
 
-app.use('/api/v1', apiRouter);
-app.use(staticRouter);
+app.register(apiRouter, { prefix: '/api/v1' })
+app.register(staticRouter)
 
 export { app };

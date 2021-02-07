@@ -1,42 +1,46 @@
-import Router from 'express-promise-router';
-import httpErrors from 'http-errors';
-
+import { apiMiddleware } from '../apiMiddleware.js'
 import { User } from '../../models/index.js';
 
-const router = Router();
+const router = (fastify, opts, done) => {
+  fastify.post('/signup', apiMiddleware(async (req, res) => {
+    const { id: userId } = await User.create(req.body);
 
-router.post('/signup', async (req, res) => {
-  const { id: userId } = await User.create(req.body);
+    const user = await User.findByPk(userId);
 
-  const user = await User.findByPk(userId);
+    req.session.userId = user.id;
 
-  req.session.userId = user.id;
+    res.header('Cache-Control', 'no-cache');
+    return user;
+  }));
 
-  return res.status(200).type('application/json').send(user);
-});
+  fastify.post('/signin', apiMiddleware(async (req, res) => {
+    const user = await User.findOne({
+      where: {
+        username: req.body.username,
+      },
+    });
 
-router.post('/signin', async (req, res) => {
-  const user = await User.findOne({
-    where: {
-      username: req.body.username,
-    },
-  });
+    if (user === null) {
+      throw fastify.httpErrors.badRequest();
+    }
+    if (user.validPassword(req.body.password) === false) {
+      throw fastify.httpErrors.badRequest();
+    }
 
-  if (user === null) {
-    throw new httpErrors.BadRequest();
-  }
-  if (user.validPassword(req.body.password) === false) {
-    throw new httpErrors.BadRequest();
-  }
+    req.session.userId = user.id;
 
-  req.session.userId = user.id;
+    res.header('Cache-Control', 'no-cache');
+    return user;
+  }));
 
-  return res.status(200).type('application/json').send(user);
-});
+  fastify.post('/signout', apiMiddleware(async (req, res) => {
+    req.session.userId = undefined;
 
-router.post('/signout', async (req, res) => {
-  req.session.userId = undefined;
-  return res.status(200).type('application/json').send({});
-});
+    res.header('Cache-Control', 'no-cache');
+    return {};
+  }));
+
+  done()
+};
 
 export { router as authRouter };

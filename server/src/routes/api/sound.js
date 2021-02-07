@@ -1,18 +1,15 @@
 import fs from 'fs/promises';
 
-import Router from 'express-promise-router';
-import httpErrors from 'http-errors';
 import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
 import { OfflineAudioContext } from 'web-audio-engine';
 
+import { apiMiddleware } from '../apiMiddleware.js'
 import { convertSound } from '../../converters/convert_sound.js';
 import { UPLOAD_PATH } from '../../paths.js';
 
 // 変換した音声の拡張子
 const EXTENSION = 'mp3';
-
-const router = Router();
 
 const mean = nums => {
   let total = 0
@@ -79,28 +76,33 @@ export const createSvgTextFromBuffer = async buffer => {
   return createSvgTextFromPeakRatios(ratios);
 }
 
-router.post('/sounds', async (req, res) => {
-  if (req.session.userId === undefined) {
-    throw new httpErrors.Unauthorized();
-  }
-  if (Buffer.isBuffer(req.body) === false) {
-    throw new httpErrors.BadRequest();
-  }
+const router = (fastify, opts, done) => {
+  fastify.post('/sounds', apiMiddleware(async (req, res) => {
+    if (req.session.userId === undefined) {
+      throw fastify.httpErrors.unauthorized();
+    }
+    if (Buffer.isBuffer(req.body) === false) {
+      throw fastify.httpErrors.badRequest();
+    }
 
-  const soundId = uuidv4();
+    const soundId = uuidv4();
 
-  const converted = await convertSound(req.body, {
-    extension: EXTENSION, // 動画の拡張子を指定する
-  });
+    const converted = await convertSound(req.body, {
+      extension: EXTENSION, // 動画の拡張子を指定する
+    });
 
-  const filePath = path.resolve(UPLOAD_PATH, `./sounds/${soundId}.${EXTENSION}`);
-  await fs.writeFile(filePath, converted);
+    const filePath = path.resolve(UPLOAD_PATH, `./sounds/${soundId}.${EXTENSION}`);
+    await fs.writeFile(filePath, converted);
 
-  const volumeSvgPath = path.resolve(UPLOAD_PATH, `./sounds/${soundId}.${EXTENSION}.meta.svg`);
-  const svgText = await createSvgTextFromBuffer(converted);
-  await fs.writeFile(volumeSvgPath, svgText, 'utf8');
+    const volumeSvgPath = path.resolve(UPLOAD_PATH, `./sounds/${soundId}.${EXTENSION}.meta.svg`);
+    const svgText = await createSvgTextFromBuffer(converted);
+    await fs.writeFile(volumeSvgPath, svgText, 'utf8');
 
-  return res.status(200).type('application/json').send({ id: soundId });
-});
+    res.header('Cache-Control', 'no-cache');
+    return { id: soundId };
+  }));
+
+  done();
+}
 
 export { router as soundRouter };
