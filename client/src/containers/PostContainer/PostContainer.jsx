@@ -1,4 +1,5 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 
 import { PostPage } from '../../components/post/PostPage';
 import { useRegisterOnReachBottom } from '../../hooks/use_register_on_reach_bottom';
@@ -9,7 +10,9 @@ const NotFoundContainer = React.lazy(() => import('../NotFoundContainer'));
 const LIMIT = 10;
 
 /** @type {React.VFC} */
-const PostContainer = ({ postId }) => {
+const PostContainer = () => {
+  const { postId } = useParams();
+
   const [isLoading, setIsLoading] = React.useState(true);
   const [isFetching, setIsFetching] = React.useState(false);
 

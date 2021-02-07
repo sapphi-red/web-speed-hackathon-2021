@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'preact-router/match';
+import { Link } from 'react-router-dom';
 
 import { ModalErrorMessage } from '../../modal/ModalErrorMessage';
 import { ModalSubmitButton } from '../../modal/ModalSubmitButton';
@@ -77,7 +77,7 @@ const AuthModalPage = ({ onSubmit, onResetError, isLoading, hasError }) => {
       </div>
       {params.type === 'signup' ? (
         <p className="mt-4">
-          <Link class="text-green-600 underline" href="/terms">
+          <Link className="text-green-600 underline" to="/terms">
             利用規約
           </Link>
           に同意して

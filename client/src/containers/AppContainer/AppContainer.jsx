@@ -1,12 +1,17 @@
 import React from 'react';
-import Router from 'preact-router';
-import AsyncRoute from 'preact-async-route';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import { AppPage } from '../../components/application/AppPage';
 import { useActiveUser } from '../../hooks/use_active_user';
 import { useModalType } from '../../hooks/use_modal_type';
 import { fetchActiveUser } from '../../utils/fetchers';
 import { ModalContainer } from '../ModalContainer';
+
+const TimelineContainer = React.lazy(() => import('../TimelineContainer'));
+const UserProfileContainer = React.lazy(() => import('../UserProfileContainer'));
+const PostContainer = React.lazy(() => import('../PostContainer'));
+const TermContainer = React.lazy(() => import('../TermContainer'));
+const NotFoundContainer = React.lazy(() => import('../NotFoundContainer'));
 
 /** @type {React.VFC} */
 const AppContainer = () => {
@@ -25,34 +30,31 @@ const AppContainer = () => {
   }, []);
 
   return (
-    <>
+    <BrowserRouter>
       <AppPage onOpenModal={setModalType}>
-        <Router>
-          <AsyncRoute
-            path="/"
-            getComponent={ () => import('../TimelineContainer').then(module => module.default) }
-          />
-          <AsyncRoute
-            path="/users/:userId"
-            getComponent={ () => import('../UserProfileContainer').then(module => module.default) }
-          />
-          <AsyncRoute
-            path="/posts/:postId"
-            getComponent={ () => import('../PostContainer').then(module => module.default) }
-          />
-          <AsyncRoute
-            path="/terms"
-            getComponent={ () => import('../TermContainer').then(module => module.default) }
-          />
-          <AsyncRoute
-            path="*"
-            getComponent={ () => import('../NotFoundContainer').then(module => module.default) }
-          />
-        </Router>
+        <React.Suspense fallback={<p>Loading...</p>}>
+          <Switch>
+            <Route exact path="/">
+              <TimelineContainer />
+            </Route>
+            <Route exact path="/users/:userId">
+              <UserProfileContainer />
+            </Route>
+            <Route exact path="/posts/:postId">
+              <PostContainer />
+            </Route>
+            <Route exact path="/terms">
+              <TermContainer />
+            </Route>
+            <Route path="*">
+              <NotFoundContainer />
+            </Route>
+          </Switch>
+        </React.Suspense>
       </AppPage>
 
       <ModalContainer />
-    </>
+    </BrowserRouter>
   );
 };
 
