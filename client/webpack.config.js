@@ -52,6 +52,11 @@ const config = {
       template: path.resolve(SRC_PATH, './index.html'),
       inject: true,
     }),
+    new HtmlWebpackPlugin({
+      filename: 'terms.html',
+      template: path.resolve(SRC_PATH, './terms.html'),
+      inject: true,
+    }),
   ],
   devServer: {
     host: '0.0.0.0',

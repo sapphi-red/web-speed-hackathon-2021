@@ -17,6 +17,11 @@ const router = (fastify, opts, done) => {
     }
   });
 
+  // SSGっぽくしたものを返す
+  fastify.get('/terms', async (req, res) => {
+    await res.sendFile('terms.html', CLIENT_DIST_PATH)
+  })
+
   // SPA 対応のため、ファイルが存在しないときに index.html を返す
   fastify.setNotFoundHandler(async (req, res) => {
     await res.sendFile('index.html', CLIENT_DIST_PATH)
