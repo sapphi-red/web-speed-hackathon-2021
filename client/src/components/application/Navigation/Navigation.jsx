@@ -1,4 +1,4 @@
-import React from 'react';
+import { useCallback } from 'react';
 
 import { faSignInAlt, faEdit, faUser, faHome, faBalanceScale } from '@fortawesome/free-solid-svg-icons';
 
@@ -15,13 +15,13 @@ import { NavigationItem } from '../NavigationItem';
 const Navigation = ({ onOpenModal }) => {
   const [activeUser] = useActiveUser();
 
-  const handleNull = React.useCallback(() => {}, [])
+  const handleNull = useCallback(() => {}, [])
 
-  const handleOpenPostModal = React.useCallback(() => {
+  const handleOpenPostModal = useCallback(() => {
     onOpenModal('post');
   }, []);
 
-  const handleOpenAuthModal = React.useCallback(() => {
+  const handleOpenAuthModal = useCallback(() => {
     onOpenModal('auth');
   }, []);
 

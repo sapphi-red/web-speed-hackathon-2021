@@ -1,11 +1,11 @@
-import React from 'react';
+import { lazy, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { UserProfilePage } from '../../components/user_profile/UserProfilePage';
 import { useRegisterOnReachBottom } from '../../hooks/use_register_on_reach_bottom';
 import { fetchTimelineByUser, fetchUser } from '../../utils/fetchers';
 
-const NotFoundContainer = React.lazy(() => import('../NotFoundContainer'));
+const NotFoundContainer = lazy(() => import('../NotFoundContainer'));
 
 const LIMIT = 10;
 
@@ -13,16 +13,16 @@ const LIMIT = 10;
 const UserProfileContainer = () => {
   const { userId } = useParams();
 
-  const [isLoading, setIsLoading] = React.useState(true);
-  const [isFetching, setIsFetching] = React.useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isFetching, setIsFetching] = useState(false);
 
-  const [user, setUser] = React.useState(null);
+  const [user, setUser] = useState(null);
 
-  const [timeline, setTimeline] = React.useState([]);
+  const [timeline, setTimeline] = useState([]);
 
-  const [offset, setOffset] = React.useState(0);
+  const [offset, setOffset] = useState(0);
 
-  React.useEffect(() => {
+  useEffect(() => {
     (async () => {
       const user = await fetchUser({ userId });
       setUser(user);
@@ -31,7 +31,7 @@ const UserProfileContainer = () => {
     });
   }, [userId]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     (async () => {
       setIsFetching(true);
       // 初回は10件のみ表示する
@@ -65,7 +65,7 @@ const UserProfileContainer = () => {
     });
   }, [isFetching, timeline, offset]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isLoading) {
       document.title = '読込中- CAwitter'
     } else if (user !== null) {

@@ -1,4 +1,4 @@
-import React from 'react';
+import { useRef, useState, useCallback } from 'react';
 
 import { faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
 
@@ -19,18 +19,18 @@ import { SoundWaveSVG } from '../SoundWaveSVG';
  */
 const SoundPlayer = ({ src, title, artist }) => {
   /** @type {React.RefObject<HTMLAudioElement>} */
-  const audioRef = React.useRef(null);
-  const [isPlaying, setIsPlaying] = React.useState(false);
-  const [currentTimeRatio, setCurrentTimeRatio] = React.useState(0);
+  const audioRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTimeRatio, setCurrentTimeRatio] = useState(0);
 
-  const handleTogglePlaying = React.useCallback(() => {
+  const handleTogglePlaying = useCallback(() => {
     setIsPlaying((isPlaying) => {
       isPlaying ? audioRef.current?.pause() : audioRef.current?.play();
       return !isPlaying;
     });
   }, []);
 
-  const handleTimeUpdate = React.useCallback(() => {
+  const handleTimeUpdate = useCallback(() => {
     setCurrentTimeRatio(audioRef.current?.currentTime / audioRef.current?.duration);
   }, []);
 

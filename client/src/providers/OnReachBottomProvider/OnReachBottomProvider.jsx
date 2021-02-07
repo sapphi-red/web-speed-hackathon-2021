@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo, useRef, useEffect } from 'react';
 
 import { OnReachBottomHandlerContext } from '../../contexts/on_reach_bottom_handler_context';
 
@@ -9,10 +9,10 @@ import { OnReachBottomHandlerContext } from '../../contexts/on_reach_bottom_hand
 
 /** @type {React.VFC<Props>} */
 const OnReachBottomProvider = ({ children }) => {
-  const store = React.useMemo(() => ({ handlers: new Set() }), []);
-  const prevReachedRef = React.useRef(true);
+  const store = useMemo(() => ({ handlers: new Set() }), []);
+  const prevReachedRef = useRef(true);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const handler = () => {
       // 念の為 2の18乗 回、最下部かどうかを確認する
       const hasReached =

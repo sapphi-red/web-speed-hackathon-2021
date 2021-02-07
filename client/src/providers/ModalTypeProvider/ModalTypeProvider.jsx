@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 
 import { ModalTypeContext } from '../../contexts/modal_type_context';
 
@@ -9,7 +9,7 @@ import { ModalTypeContext } from '../../contexts/modal_type_context';
 
 /** @type {React.VFC<Props>} */
 const ModalTypeProvider = ({ children }) => {
-  const store = React.useState('none');
+  const store = useState('none');
   return <ModalTypeContext.Provider value={store}>{children}</ModalTypeContext.Provider>;
 };
 

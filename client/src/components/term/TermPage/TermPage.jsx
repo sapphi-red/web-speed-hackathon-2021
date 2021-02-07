@@ -1,12 +1,12 @@
-import React from 'react';
+import { lazy, useState, Suspense } from 'react';
 
 import { useRegisterOnReachBottom } from '../../../hooks/use_register_on_reach_bottom';
 
-const TermContent = React.lazy(() => import('../TermContent'))
+const TermContent = lazy(() => import('../TermContent'))
 
 /** @type {React.VFC} */
 const TermPage = () => {
-  const [showUnder, setShowUnder] = React.useState(false)
+  const [showUnder, setShowUnder] = useState(false)
 
   // 画面最下部までスクロールしたときには、10件読み込む
   useRegisterOnReachBottom(() => {
@@ -70,9 +70,9 @@ const TermPage = () => {
 
       {
         showUnder
-          ? <React.Suspense fallback={<p>Loading...</p>}>
+          ? <Suspense fallback={<p>Loading...</p>}>
               <TermContent />
-            </React.Suspense>
+            </Suspense>
           : null
       }
     </article>

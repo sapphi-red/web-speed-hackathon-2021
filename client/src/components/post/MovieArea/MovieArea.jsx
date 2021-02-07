@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { getMoviePath } from '../../../utils/get_path';
 import { AspectRatioBox } from '../../foundation/AspectRatioBox';
 import { PausableMovie } from '../../foundation/PausableMovie';

@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 
 import { ModalErrorMessage } from '../../modal/ModalErrorMessage';
@@ -24,32 +24,32 @@ import { AuthInput } from '../AuthInput';
 /** @type {React.VFC<Props>} */
 const AuthModalPage = ({ onSubmit, onResetError, isLoading, hasError }) => {
   /** @type {[SubmitParams, (params: SubmitParams) => void] */
-  const [params, setParams] = React.useState({ type: 'signin', username: '', name: '', password: '' });
+  const [params, setParams] = useState({ type: 'signin', username: '', name: '', password: '' });
 
-  const handleToggleType = React.useCallback(() => {
+  const handleToggleType = useCallback(() => {
     onResetError();
     setParams((params) => ({ ...params, type: params.type === 'signin' ? 'signup' : 'signin' }));
   }, [onResetError]);
 
   /** @type {React.ChangeEventHandler<HTMLInputElement>} */
-  const handleChangeUsername = React.useCallback((ev) => {
+  const handleChangeUsername = useCallback((ev) => {
     const value = ev.currentTarget.value;
     setParams((params) => ({ ...params, username: value }));
   }, []);
 
   /** @type {React.ChangeEventHandler<HTMLInputElement>} */
-  const handleChangeName = React.useCallback((ev) => {
+  const handleChangeName = useCallback((ev) => {
     const value = ev.currentTarget.value;
     setParams((params) => ({ ...params, name: value }));
   }, []);
 
   /** @type {React.ChangeEventHandler<HTMLInputElement>} */
-  const handleChangePassword = React.useCallback((ev) => {
+  const handleChangePassword = useCallback((ev) => {
     const value = ev.currentTarget.value;
     setParams((params) => ({ ...params, password: value }));
   }, []);
 
-  const handleSubmit = React.useCallback(() => {
+  const handleSubmit = useCallback(() => {
     onResetError();
     onSubmit(params);
   }, [params, onSubmit, onResetError]);

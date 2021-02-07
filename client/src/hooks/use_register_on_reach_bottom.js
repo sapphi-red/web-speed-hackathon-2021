@@ -1,4 +1,4 @@
-import React from 'react';
+import { useContext, useEffect } from 'react';
 
 import { OnReachBottomHandlerContext } from '../contexts/on_reach_bottom_handler_context';
 
@@ -7,11 +7,11 @@ import { OnReachBottomHandlerContext } from '../contexts/on_reach_bottom_handler
  * @param {Array<*>} deps
  */
 function useRegisterOnReachBottom(handler, deps) {
-  const { handlers } = React.useContext(OnReachBottomHandlerContext);
+  const { handlers } = useContext(OnReachBottomHandlerContext);
 
-  const memoizedHandler = React.useCallback(handler, deps);
+  const memoizedHandler = useCallback(handler, deps);
 
-  React.useEffect(() => {
+  useEffect(() => {
     handlers.add(memoizedHandler);
     return () => handlers.delete(memoizedHandler);
   }, [memoizedHandler]);

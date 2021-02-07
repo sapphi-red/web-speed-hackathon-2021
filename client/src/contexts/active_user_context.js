@@ -1,5 +1,5 @@
-import React from 'react';
+import { createContext } from 'react';
 
-const ActiveUserContext = React.createContext([undefined, () => {}]);
+const ActiveUserContext = createContext([undefined, () => {}]);
 
 export { ActiveUserContext };

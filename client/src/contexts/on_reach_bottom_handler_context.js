@@ -1,6 +1,6 @@
-import React from 'react';
+import { createContext } from 'react';
 
-const OnReachBottomHandlerContext = React.createContext({
+const OnReachBottomHandlerContext = createContext({
   handlers: new Set(),
 });
 

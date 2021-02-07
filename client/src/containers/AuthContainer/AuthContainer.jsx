@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useCallback } from 'react';
 
 import { AuthModalPage } from '../../components/auth_modal/AuthModalPage';
 import { useActiveUser } from '../../hooks/use_active_user';
@@ -10,14 +10,14 @@ const AuthContainer = () => {
   const [_modalType, setModalType] = useModalType();
   const [_activeUser, setActiveUser] = useActiveUser();
 
-  const [hasError, setHasError] = React.useState(false);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [hasError, setHasError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleResetError = React.useCallback(() => {
+  const handleResetError = useCallback(() => {
     setHasError(false);
   }, []);
 
-  const handleSubmit = React.useCallback(({ type, ...params }) => {
+  const handleSubmit = useCallback(({ type, ...params }) => {
     (async () => {
       setIsLoading(true);
       if (type === 'signin') {

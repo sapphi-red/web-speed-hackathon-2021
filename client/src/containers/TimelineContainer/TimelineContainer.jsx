@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 
 import { TimelinePage } from '../../components/timeline/TimelinePage';
 import { useRegisterOnReachBottom } from '../../hooks/use_register_on_reach_bottom';
@@ -8,14 +8,14 @@ const LIMIT = 10;
 
 /** @type {React.VFC} */
 const TimelineContainer = () => {
-  const [isLoading, setIsLoading] = React.useState(true);
-  const [isFetching, setIsFetching] = React.useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isFetching, setIsFetching] = useState(false);
 
-  const [timeline, setTimeline] = React.useState([]);
+  const [timeline, setTimeline] = useState([]);
 
-  const [offset, setOffset] = React.useState(0);
+  const [offset, setOffset] = useState(0);
 
-  React.useEffect(() => {
+  useEffect(() => {
     (async () => {
       setIsFetching(true);
       // 初回は10件のみ表示する
@@ -43,7 +43,7 @@ const TimelineContainer = () => {
     });
   }, [isFetching, timeline, offset]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isLoading) {
       document.title = '読込中- CAwitter'
     } else {

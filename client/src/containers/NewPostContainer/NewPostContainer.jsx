@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { NewPostModalPage } from '../../components/new_post_modal/NewPostModalPage';
@@ -10,14 +10,14 @@ const NewPostContainer = () => {
   const history = useHistory();
   const [_modalType, setModalType] = useModalType();
 
-  const [hasError, setHasError] = React.useState(false);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [hasError, setHasError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleResetError = React.useCallback(() => {
+  const handleResetError = useCallback(() => {
     setHasError(false);
   }, []);
 
-  const handleSubmit = React.useCallback(
+  const handleSubmit = useCallback(
     (params) => {
       (async () => {
         setIsLoading(true);

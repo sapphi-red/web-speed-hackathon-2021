@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { getSoundPath } from '../../../utils/get_path';
 import { SoundPlayer } from '../../foundation/SoundPlayer';
 

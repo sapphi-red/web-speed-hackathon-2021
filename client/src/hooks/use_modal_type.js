@@ -1,4 +1,4 @@
-import React from 'react';
+import { createContext } from 'react';
 
 import { ModalTypeContext } from '../contexts/modal_type_context';
 
@@ -6,7 +6,7 @@ import { ModalTypeContext } from '../contexts/modal_type_context';
  * @returns {[string, (type: string) => void]}
  */
 function useModalType() {
-  const [modalType, setModalType] = React.useContext(ModalTypeContext);
+  const [modalType, setModalType] = useContext(ModalTypeContext);
   return [modalType, setModalType];
 }
 

@@ -1,5 +1,5 @@
-import React from 'react';
+import { createContext } from 'react';
 
-const ModalTypeContext = React.createContext(['none', () => {}]);
+const ModalTypeContext = createContext(['none', () => {}]);
 
 export { ModalTypeContext };

@@ -1,11 +1,11 @@
-import React from 'react';
+import { lazy, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { PostPage } from '../../components/post/PostPage';
 import { useRegisterOnReachBottom } from '../../hooks/use_register_on_reach_bottom';
 import { fetchPost, fetchCommentsByPost } from '../../utils/fetchers';
 
-const NotFoundContainer = React.lazy(() => import('../NotFoundContainer'));
+const NotFoundContainer = lazy(() => import('../NotFoundContainer'));
 
 const LIMIT = 10;
 
@@ -13,16 +13,16 @@ const LIMIT = 10;
 const PostContainer = () => {
   const { postId } = useParams();
 
-  const [isLoading, setIsLoading] = React.useState(true);
-  const [isFetching, setIsFetching] = React.useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isFetching, setIsFetching] = useState(false);
 
-  const [post, setPost] = React.useState(null);
+  const [post, setPost] = useState(null);
 
-  const [comments, setComments] = React.useState([]);
+  const [comments, setComments] = useState([]);
 
-  const [offset, setOffset] = React.useState(0);
+  const [offset, setOffset] = useState(0);
 
-  React.useEffect(() => {
+  useEffect(() => {
     (async () => {
       const post = await fetchPost({ postId });
       setPost(post);
@@ -31,7 +31,7 @@ const PostContainer = () => {
     });
   }, [postId]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     (async () => {
       setIsFetching(true);
       // 初回は10件のみ表示する
@@ -65,7 +65,7 @@ const PostContainer = () => {
     });
   }, [isFetching, comments, offset]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isLoading) {
       document.title = '読込中- CAwitter'
     } else if (post !== null) {

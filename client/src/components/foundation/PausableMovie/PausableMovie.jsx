@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React from 'react';
+import { useRef, useState, useCallback } from 'react';
 
 import { faPlay, faPause } from '@fortawesome/free-solid-svg-icons'
 
@@ -16,11 +16,11 @@ import { FontAwesomeIcon } from '../FontAwesomeIcon/FontAwesomeIcon';
  */
 const PausableMovie = ({ src }) => {
   /** @type {React.RefObject<HTMLVideoElement>} */
-  const videoRef = React.useRef(null);
+  const videoRef = useRef(null);
 
-  const [isPlaying, setIsPlaying] = React.useState(true);
+  const [isPlaying, setIsPlaying] = useState(true);
 
-  const handleClick = React.useCallback(() => {
+  const handleClick = useCallback(() => {
     if (isPlaying) {
       videoRef.current?.pause();
       setIsPlaying(false);

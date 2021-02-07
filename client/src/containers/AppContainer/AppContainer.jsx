@@ -1,4 +1,4 @@
-import React from 'react';
+import { lazy, useEffect, Suspense } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import { AppPage } from '../../components/application/AppPage';
@@ -7,18 +7,18 @@ import { useModalType } from '../../hooks/use_modal_type';
 import { fetchActiveUser } from '../../utils/fetchers';
 import { ModalContainer } from '../ModalContainer';
 
-const TimelineContainer = React.lazy(() => import('../TimelineContainer'));
-const UserProfileContainer = React.lazy(() => import('../UserProfileContainer'));
-const PostContainer = React.lazy(() => import('../PostContainer'));
-const TermContainer = React.lazy(() => import('../TermContainer'));
-const NotFoundContainer = React.lazy(() => import('../NotFoundContainer'));
+const TimelineContainer = lazy(() => import('../TimelineContainer'));
+const UserProfileContainer = lazy(() => import('../UserProfileContainer'));
+const PostContainer = lazy(() => import('../PostContainer'));
+const TermContainer = lazy(() => import('../TermContainer'));
+const NotFoundContainer = lazy(() => import('../NotFoundContainer'));
 
 /** @type {React.VFC} */
 const AppContainer = () => {
   const [_modalType, setModalType] = useModalType();
   const [_activeUser, setActiveUser] = useActiveUser();
 
-  React.useEffect(() => {
+  useEffect(() => {
     ;(async () => {
       try {
         const user = await fetchActiveUser();
@@ -32,7 +32,7 @@ const AppContainer = () => {
   return (
     <BrowserRouter>
       <AppPage onOpenModal={setModalType}>
-        <React.Suspense fallback={<div></div>}>
+        <Suspense fallback={<div></div>}>
           <Switch>
             <Route exact path="/">
               <TimelineContainer />
@@ -50,7 +50,7 @@ const AppContainer = () => {
               <NotFoundContainer />
             </Route>
           </Switch>
-        </React.Suspense>
+        </Suspense>
       </AppPage>
 
       <ModalContainer />

@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 
 import { ActiveUserContext } from '../../contexts/active_user_context';
 
@@ -9,7 +9,7 @@ import { ActiveUserContext } from '../../contexts/active_user_context';
 
 /** @type {React.VFC<Props>} */
 const ActiveUserProvider = ({ children }) => {
-  const store = React.useState(null);
+  const store = useState(null);
   return <ActiveUserContext.Provider value={store}>{children}</ActiveUserContext.Provider>;
 };
 

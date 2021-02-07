@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import React from 'react';
 
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 

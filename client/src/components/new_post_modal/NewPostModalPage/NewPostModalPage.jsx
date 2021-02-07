@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useCallback } from 'react';
 
 import { faImages, faMusic, faVideo } from '@fortawesome/free-solid-svg-icons';
 
@@ -27,18 +27,18 @@ const MAX_UPLOAD_BYTES_LIMIT = 10 * 1024 * 1024;
 
 /** @type {React.VFC<Props>} */
 const NewPostModalPage = ({ onSubmit, onResetError, isLoading, hasError }) => {
-  const [params, setParams] = React.useState({ text: '', movie: undefined, sound: undefined, images: [] });
+  const [params, setParams] = useState({ text: '', movie: undefined, sound: undefined, images: [] });
 
-  const [hasFileError, setHasFileError] = React.useState(false);
+  const [hasFileError, setHasFileError] = useState(false);
 
   /** @type {React.ChangeEventHandler<HTMLInputElement>} */
-  const handleChangeText = React.useCallback((ev) => {
+  const handleChangeText = useCallback((ev) => {
     const value = ev.currentTarget.value;
     setParams((params) => ({ ...params, text: value }));
   }, []);
 
   /** @type {React.ChangeEventHandler<HTMLInputElement>} */
-  const handleChangeImages = React.useCallback((ev) => {
+  const handleChangeImages = useCallback((ev) => {
     const files = Array.from(ev.currentTarget.files).slice(0, 4);
     const isValid = files.every((file) => file.size <= MAX_UPLOAD_BYTES_LIMIT);
 
@@ -49,7 +49,7 @@ const NewPostModalPage = ({ onSubmit, onResetError, isLoading, hasError }) => {
   }, []);
 
   /** @type {React.ChangeEventHandler<HTMLInputElement>} */
-  const handleChangeSound = React.useCallback((ev) => {
+  const handleChangeSound = useCallback((ev) => {
     const file = ev.currentTarget.files[0];
     const isValid = file?.size <= MAX_UPLOAD_BYTES_LIMIT;
 
@@ -60,7 +60,7 @@ const NewPostModalPage = ({ onSubmit, onResetError, isLoading, hasError }) => {
   }, []);
 
   /** @type {React.ChangeEventHandler<HTMLInputElement>} */
-  const handleChangeMovie = React.useCallback((ev) => {
+  const handleChangeMovie = useCallback((ev) => {
     const file = ev.currentTarget.files[0];
     const isValid = file?.size <= MAX_UPLOAD_BYTES_LIMIT;
 
@@ -70,7 +70,7 @@ const NewPostModalPage = ({ onSubmit, onResetError, isLoading, hasError }) => {
     }
   }, []);
 
-  const handleSubmit = React.useCallback(() => {
+  const handleSubmit = useCallback(() => {
     onResetError();
     onSubmit(params);
   }, [params, onSubmit, onResetError]);
