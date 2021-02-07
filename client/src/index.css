@@ -2,7 +2,8 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-@import './styles/webfont.css';
+@import './styles/webfont-normal.css';
+@import './styles/webfont-bold-critical.css';
 
 body {
   font-family: '源暎エムゴ', sans-serif;

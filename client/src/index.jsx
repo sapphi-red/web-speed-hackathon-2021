@@ -6,6 +6,8 @@ import { ActiveUserProvider } from './providers/ActiveUserProvider';
 import { ModalTypeProvider } from './providers/ModalTypeProvider';
 import { OnReachBottomProvider } from './providers/OnReachBottomProvider';
 
+import('./styles/webfont-bold.css')
+
 window.addEventListener('load', () => {
   ReactDOM.render(
     <ActiveUserProvider>
