@@ -16,5 +16,8 @@ module.exports = {
         useSpread: true
       },
     ],
+    ...(process.env.BABEL_ENV === "production" ? [
+      'transform-react-remove-prop-types'
+    ] : [])
   ],
 };
