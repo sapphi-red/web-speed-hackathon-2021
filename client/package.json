@@ -17,7 +17,8 @@
     "core-js": "^3.8.2",
     "fast-average-color": "^6.3.0",
     "preact": "^10.5.12",
-    "react-router-dom": "^5.2.0",
+    "preact-async-route": "^2.2.1",
+    "preact-router": "^3.2.1",
     "tailwindcss": "^2.0.1"
   },
   "devDependencies": {
