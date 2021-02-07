@@ -32,7 +32,7 @@ const AppContainer = () => {
   return (
     <BrowserRouter>
       <AppPage onOpenModal={setModalType}>
-        <React.Suspense fallback={<p>Loading...</p>}>
+        <React.Suspense fallback={<div></div>}>
           <Switch>
             <Route exact path="/">
               <TimelineContainer />
