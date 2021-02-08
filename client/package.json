@@ -18,8 +18,8 @@
     "fast-average-color": "^6.3.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-router-dom": "^5.2.0",
-    "tailwindcss": "^2.0.1"
+    "tailwindcss": "^2.0.1",
+    "wouter": "^2.7.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
@@ -28,7 +28,6 @@
     "@types/classnames": "^2.2.11",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
-    "@types/react-router-dom": "^5.1.7",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.0.1",
     "css-minimizer-webpack-plugin": "^1.2.0",

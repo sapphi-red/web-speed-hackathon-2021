@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useLocation } from 'wouter';
 
 import { NewPostModalPage } from '../../components/new_post_modal/NewPostModalPage';
 import { useModalType } from '../../hooks/use_modal_type';
@@ -7,7 +7,7 @@ import { sendNewPost } from '../../utils/fetchers';
 
 /** @type {React.VFC} */
 const NewPostContainer = () => {
-  const history = useHistory();
+  const [location, setLocation] = useLocation();
   const [_modalType, setModalType] = useModalType();
 
   const [hasError, setHasError] = React.useState(false);
@@ -23,14 +23,14 @@ const NewPostContainer = () => {
         setIsLoading(true);
         const post = await sendNewPost(params);
         setModalType('none');
-        history.push(`/posts/${post.id}`);
+        setLocation(`/posts/${post.id}`);
       })().catch((err) => {
         setHasError(true);
         setIsLoading(false);
         throw err;
       });
     },
-    [history, location],
+    [setLocation],
   );
 
   return (

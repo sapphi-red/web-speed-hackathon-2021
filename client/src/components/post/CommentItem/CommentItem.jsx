@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import { getProfileImagePath } from '../../../utils/get_path';
 import { formatDate } from '../../../utils/date';
+import { Link } from '../../utils/Link';
 
 /**
  * @typedef {object} Props

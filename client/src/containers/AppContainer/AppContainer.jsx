@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'wouter';
 
 import { AppPage } from '../../components/application/AppPage';
 import { useActiveUser } from '../../hooks/use_active_user';
@@ -30,20 +30,20 @@ const AppContainer = () => {
   }, []);
 
   return (
-    <BrowserRouter>
+    <>
       <AppPage onOpenModal={setModalType}>
         <React.Suspense fallback={<div></div>}>
           <Switch>
-            <Route exact path="/">
+            <Route path="/">
               <TimelineContainer />
             </Route>
-            <Route exact path="/users/:userId">
+            <Route path="/users/:userId">
               <UserProfileContainer />
             </Route>
-            <Route exact path="/posts/:postId">
+            <Route path="/posts/:postId">
               <PostContainer />
             </Route>
-            <Route exact path="/terms">
+            <Route path="/terms">
               <TermContainer />
             </Route>
             <Route path="*">
@@ -54,7 +54,7 @@ const AppContainer = () => {
       </AppPage>
 
       <ModalContainer />
-    </BrowserRouter>
+    </>
   );
 };
 

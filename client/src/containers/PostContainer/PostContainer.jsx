@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useRoute } from 'wouter';
 
 import { PostPage } from '../../components/post/PostPage';
 import { useRegisterOnReachBottom } from '../../hooks/use_register_on_reach_bottom';
@@ -11,7 +11,7 @@ const LIMIT = 10;
 
 /** @type {React.VFC} */
 const PostContainer = () => {
-  const { postId } = useParams();
+  const [_match, { postId }] = useRoute('/posts/:postId');
 
   const [isLoading, setIsLoading] = React.useState(true);
   const [isFetching, setIsFetching] = React.useState(false);

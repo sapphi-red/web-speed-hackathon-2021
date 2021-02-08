@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useLocation } from 'wouter';
 
+import { Link } from '../../utils/Link';
 import { getProfileImagePath } from '../../../utils/get_path';
 import { formatDate } from '../../../utils/date';
 import { ImageArea } from '../../post/ImageArea';
@@ -25,7 +26,7 @@ const isClickedAnchorOrButton = (target, currenTarget) => {
 
 /** @type {React.VFC<Props>} */
 const TimelineItem = ({ post }) => {
-  const history = useHistory();
+  const [_location, setLocation] = useLocation();
 
   /**
    * ボタンやリンク以外の箇所をクリックしたとき かつ 文字が選択されてないとき、投稿詳細ページに遷移する
@@ -35,7 +36,7 @@ const TimelineItem = ({ post }) => {
     (ev) => {
       const isSelectedText = document.getSelection().isCollapsed === false;
       if (!isClickedAnchorOrButton(ev.target, ev.currenTarget) && !isSelectedText) {
-        history.push(`/posts/${post.id}`);
+        setLocation(`/posts/${post.id}`);
       }
     },
     [post],

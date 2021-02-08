@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import { ModalErrorMessage } from '../../modal/ModalErrorMessage';
 import { ModalSubmitButton } from '../../modal/ModalSubmitButton';
 import { AuthInput } from '../AuthInput';
+import { Link } from '../../utils/Link';
 
 /**
  * @typedef {object} SubmitParams
