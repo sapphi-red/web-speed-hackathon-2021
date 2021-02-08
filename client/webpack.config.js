@@ -62,7 +62,12 @@ const config = {
     host: '0.0.0.0',
     port: 8080,
     contentBase: [PUBLIC_PATH, UPLOAD_PATH],
-    historyApiFallback: true,
+    historyApiFallback: {
+      rewrites: [
+        { from: /^\/terms$/, to: '/terms.html' },
+        { from: /./, to: '/index.html' }
+      ]
+    },
     proxy: {
       '/api': 'http://localhost:3000',
     },
