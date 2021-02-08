@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { useRegisterOnReachBottom } from '../../../hooks/use_register_on_reach_bottom';
 
@@ -6,15 +6,17 @@ const TermContent = React.lazy(() => import('../TermContent'))
 
 /** @type {React.VFC} */
 const TermPage = () => {
-  const [showUnder, setShowUnder] = React.useState(false)
+  const [showUnder1, setShowUnder1] = React.useState(false)
+  const [showUnder2, setShowUnder2] = React.useState(false)
 
   // 画面最下部までスクロールしたときには、10件読み込む
   useRegisterOnReachBottom(() => {
-    setShowUnder(true)
+    setShowUnder1(true)
+    setShowUnder2(true)
   }, []);
 
   return (
-    <article className="pb-16 px-2 leading-relaxed md:pt-2 md:px-4">
+    <article className="terms pb-16 px-2 leading-relaxed md:pt-2 md:px-4">
       <h1 className="mb-2 mt-4 text-3xl font-bold">利用規約</h1>
 
       <p>
@@ -47,29 +49,34 @@ const TermPage = () => {
         </li>
       </ol>
 
-      <h2 className="mb-2 mt-4 text-2xl font-bold">第3条（ユーザーIDおよびパスワードの管理）</h2>
-      <ol className="pl-8 list-decimal">
-        <li>ユーザーは，自己の責任において，本サービスのユーザーIDおよびパスワードを適切に管理するものとします。</li>
-        <li>
-          ユーザーは，いかなる場合にも，ユーザーIDおよびパスワードを第三者に譲渡または貸与し，もしくは第三者と共用することはできません。当社は，ユーザーIDとパスワードの組み合わせが登録情報と一致してログインされた場合には，そのユーザーIDを登録しているユーザー自身による利用とみなします。
-        </li>
-        <li>
-          ユーザーID及びパスワードが第三者によって使用されたことによって生じた損害は，当社に故意又は重大な過失がある場合を除き，当社は一切の責任を負わないものとします。
-        </li>
-      </ol>
-
-      <h2 className="mb-2 mt-4 text-2xl font-bold">第4条（利用料金および支払方法）</h2>
-      <ol className="pl-8 list-decimal">
-        <li>
-          ユーザーは，本サービスの有料部分の対価として，当社が別途定め，本ウェブサイトに表示する利用料金を，当社が指定する方法により支払うものとします。
-        </li>
-        <li>
-          ユーザーが利用料金の支払を遅滞した場合には，ユーザーは年14．6％の割合による遅延損害金を支払うものとします。
-        </li>
-      </ol>
-
       {
-        showUnder
+        showUnder1
+        ? <>
+            <h2 className="mb-2 mt-4 text-2xl font-bold">第3条（ユーザーIDおよびパスワードの管理）</h2>
+            <ol className="pl-8 list-decimal">
+              <li>ユーザーは，自己の責任において，本サービスのユーザーIDおよびパスワードを適切に管理するものとします。</li>
+              <li>
+                ユーザーは，いかなる場合にも，ユーザーIDおよびパスワードを第三者に譲渡または貸与し，もしくは第三者と共用することはできません。当社は，ユーザーIDとパスワードの組み合わせが登録情報と一致してログインされた場合には，そのユーザーIDを登録しているユーザー自身による利用とみなします。
+              </li>
+              <li>
+                ユーザーID及びパスワードが第三者によって使用されたことによって生じた損害は，当社に故意又は重大な過失がある場合を除き，当社は一切の責任を負わないものとします。
+              </li>
+            </ol>
+
+            <h2 className="mb-2 mt-4 text-2xl font-bold">第4条（利用料金および支払方法）</h2>
+            <ol className="pl-8 list-decimal">
+              <li>
+                ユーザーは，本サービスの有料部分の対価として，当社が別途定め，本ウェブサイトに表示する利用料金を，当社が指定する方法により支払うものとします。
+              </li>
+              <li>
+                ユーザーが利用料金の支払を遅滞した場合には，ユーザーは年14．6％の割合による遅延損害金を支払うものとします。
+              </li>
+            </ol>
+          </>
+        : null
+      }
+      {
+        showUnder2
           ? <React.Suspense fallback={<p>Loading...</p>}>
               <TermContent />
             </React.Suspense>
