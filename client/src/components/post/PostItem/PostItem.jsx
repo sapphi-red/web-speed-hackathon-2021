@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'preact-router/match';
+import { Link } from 'react-router-dom';
 
 import { getProfileImagePath } from '../../../utils/get_path';
 import { formatDate } from '../../../utils/date';
@@ -19,20 +19,20 @@ const PostItem = ({ post }) => {
         <div className="flex items-center justify-center">
           <div className="flex-grow-0 flex-shrink-0 pr-2">
             <Link
-              class="block w-14 h-14 bg-gray-300 border border-gray-300 rounded-full hover:opacity-95 overflow-hidden sm:w-16 sm:h-16"
-              href={`/users/${post.user.username}`}
+              className="block w-14 h-14 bg-gray-300 border border-gray-300 rounded-full hover:opacity-95 overflow-hidden sm:w-16 sm:h-16"
+              to={`/users/${post.user.username}`}
             >
               <img alt={post.user.profileImage.alt} src={getProfileImagePath(post.user.profileImage.id)} loading="lazy" />
             </Link>
           </div>
           <div className="flex-grow flex-shrink min-w-0 whitespace-nowrap overflow-hidden overflow-ellipsis">
             <p>
-              <Link class="text-gray-800 hover:underline font-bold" href={`/users/${post.user.username}`}>
+              <Link className="text-gray-800 hover:underline font-bold" to={`/users/${post.user.username}`}>
                 {post.user.name}
               </Link>
             </p>
             <p>
-              <Link class="text-gray-500 hover:underline" href={`/users/${post.user.username}`}>
+              <Link className="text-gray-500 hover:underline" to={`/users/${post.user.username}`}>
                 @{post.user.username}
               </Link>
             </p>
@@ -56,7 +56,7 @@ const PostItem = ({ post }) => {
             </div>
           ) : null}
           <p className="mt-2 text-sm sm:mt-4">
-            <Link class="text-gray-500 hover:underline" href={`/posts/${post.id}`}>
+            <Link className="text-gray-500 hover:underline" to={`/posts/${post.id}`}>
               <time dateTime={new Date(post.createdAt).toISOString()}>
                 {formatDate(post.createdAt)}
               </time>
